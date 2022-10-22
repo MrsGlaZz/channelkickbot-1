@@ -2,6 +2,14 @@ import Discord from "discord.js"
 import { REST, Routes } from "discord.js"
 import config from "./config.json" assert {type: "json"}
 
+import { PermissionFlagsBits } from 'discord.js';
+
+// Überprüfe die Berechtigungen
+if (!message.guild.members.me.permissions.has(PermissionFlagsBits.MoveMembers)) {
+  message.channel.send("Ich habe nicht die Berechtigung, Mitglieder zu verschieben.");
+  return;
+}
+
 if (!config.token) {
 	console.log("Please put the bot token into the config.json file.")
 	process.exit(0)
